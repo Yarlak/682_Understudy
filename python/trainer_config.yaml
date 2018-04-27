@@ -201,14 +201,14 @@ rollBrain:
     
 
 p_brain1:
-    max_steps: 5.0e6
+    max_steps: 1.0e6
     num_layers: 3
     hidden_units: 50
 
     
     
 p_brain2:
-    max_steps: 5.0e6
+    max_steps: 1.0e6
     num_layers: 3
     hidden_units: 50
 

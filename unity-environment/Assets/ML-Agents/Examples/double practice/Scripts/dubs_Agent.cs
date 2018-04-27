@@ -7,7 +7,7 @@ public class dubs_Agent : Agent {
 	Rigidbody rBody;
     void Start () 
 	{
-		Time.timeScale = 0.25f;
+		//Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
     }
 
@@ -34,32 +34,21 @@ public class dubs_Agent : Agent {
 		
         
         
-		float tempOne = Random.value;
-		float tempTwo = Random.value;
 		
-		int mult1 = 1;
-		int mult2 = 1;
-		
-		if (tempOne > 0.5f)
-		{
-			mult1 = -1;
-		}
-		
-		if (tempTwo > 0.5f)
-		{
-			mult2 = -1;
-		}
 		
 		if (Target.GetComponent<dubs_reward>().is_active == 0 && Target1.GetComponent<dubs_reward>().is_active == 0)
 		{
+						
 			// Move the target to a new spot
-			Target.transform.position = new Vector3(Random.value * 3 + 1 , 0.5f, Random.value * mult1 * 3 + 1 );
+			Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
 			Target.GetComponent<dubs_reward>().is_active = 1;
 			Target.GetComponent<Renderer>().material.color = Color.yellow;
 			
-			Target1.transform.position = new Vector3(Random.value * -3 - 1 , 0.5f, Random.value * mult2 * 3 -1);
+			Target1.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4 );
 			Target1.GetComponent<dubs_reward>().is_active = 1;
 			Target1.GetComponent<Renderer>().material.color = Color.yellow;
+			
+			
 		}
 		
         
@@ -165,11 +154,8 @@ public class dubs_Agent : Agent {
 		
 		if (is_bitch == false)
 		{
-			//action1 = vectorAction[2];
-			//action2 = vectorAction[3];
-			action1 = 0.0f;
-			action2 = 0.0f;
-			
+			action1 = vectorAction[2];
+			action2 = vectorAction[3];
 		}
 		
 		

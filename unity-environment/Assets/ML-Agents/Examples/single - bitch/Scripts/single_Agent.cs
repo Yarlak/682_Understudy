@@ -21,28 +21,11 @@ public class single_Agent : Agent {
 		this.rBody.angularVelocity = Vector3.zero;
 		this.rBody.velocity = Vector3.zero;
 		
-
-		
-		float tempOne = Random.value;
-		float tempTwo = Random.value;
-		
-		int mult1 = 1;
-		int mult2 = 1;
-		
-		if (tempOne > 0.5f)
-		{
-			mult1 = -1;
-		}
-		
-		if (tempTwo > 0.5f)
-		{
-			mult2 = -1;
-		}
 		
 		if (Target.GetComponent<single_reward>().is_active == 0)
 		{
 			// Move the target to a new spot
-			Target.transform.position = new Vector3(Random.value * mult2 * 3 + 1 * mult2 , 0.5f, Random.value * mult1 * 3 + 1 * mult1 );
+			Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
 			Target.GetComponent<single_reward>().is_active = 1;
 			Target.GetComponent<Renderer>().material.color = Color.yellow;
 			
