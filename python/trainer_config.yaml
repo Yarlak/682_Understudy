@@ -212,11 +212,15 @@ p_brain2:
     num_layers: 3
     hidden_units: 50
 
-dom_brain:
+p2_brain1:
     max_steps: 1.0e6
-    learning_rate: 5.0e-4
-    batch_size: 64
-    hidden_units: 256
-    num_layers: 2
-    normalize: false
+    num_layers: 3
+    hidden_units: 50
+
+    
+    
+p2_brain2:
+    max_steps: 1.0e6
+    num_layers: 3
+    hidden_units: 50
 
