@@ -54,8 +54,8 @@ public class single_Agent : Agent {
 		AddVectorObs((this.transform.position.z - 5)/5);
 		
 		// Agent velocity
-		AddVectorObs(rBody.velocity.x/5);
-		AddVectorObs(rBody.velocity.z/5);
+		//AddVectorObs(rBody.velocity.x/5);
+		//AddVectorObs(rBody.velocity.z/5);
 	}
 	
 	public float speed = 10;

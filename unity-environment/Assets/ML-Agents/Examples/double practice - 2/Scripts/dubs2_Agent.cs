@@ -7,7 +7,7 @@ public class dubs2_Agent : Agent {
 	Rigidbody rBody;
     void Start () 
 	{
-		Time.timeScale = 0.25f;
+		//Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
     }
 
@@ -26,11 +26,11 @@ public class dubs2_Agent : Agent {
         // The agent fell
 		
 		
-		this.transform.position = new Vector3(3.0f, 0.0f, 3.0f);
+		//this.transform.position = new Vector3(3.0f, 0.0f, 3.0f);
 		this.rBody.angularVelocity = Vector3.zero;
 		this.rBody.velocity = Vector3.zero;
 		
-		other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
+		//other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
 		
 		
 		if (Target.GetComponent<dubs2_reward>().is_active == 0 && Target1.GetComponent<dubs2_reward>().is_active == 0)
