@@ -201,9 +201,9 @@ rollBrain:
     
 
 p_brain1:
-    max_steps: 1.0e6
+    max_steps: 3.0e6
     num_layers: 3
-    hidden_units: 50
+    hidden_units: 100
 
     
     
@@ -213,14 +213,27 @@ p_brain2:
     hidden_units: 50
 
 p2_brain1:
-    max_steps: 1.0e6
+    max_steps: 2.0e6
     num_layers: 3
-    hidden_units: 50
-
-    
+    hidden_units: 256  
     
 p2_brain2:
     max_steps: 1.0e6
+    num_layers: 3
+    hidden_units: 50
+    
+single_brain1:
+    max_steps: 5.0e5
+    num_layers: 3
+    hidden_units: 50
+    
+p3_brain1:
+    max_steps: 1.0e7
+    num_layers: 3
+    hidden_units: 50
+    
+p3_brain2:
+    max_steps: 1.0e7
     num_layers: 3
     hidden_units: 50
 

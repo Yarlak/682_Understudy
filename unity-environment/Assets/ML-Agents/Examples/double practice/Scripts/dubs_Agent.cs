@@ -31,10 +31,7 @@ public class dubs_Agent : Agent {
 		this.rBody.velocity = Vector3.zero;
 		
 		other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
-		
-        
-        
-		
+
 		
 		if (Target.GetComponent<dubs_reward>().is_active == 0 && Target1.GetComponent<dubs_reward>().is_active == 0)
 		{
@@ -65,8 +62,8 @@ public class dubs_Agent : Agent {
 		
 		if (is_bitch)
 		{
-			AddVectorObs(master.GetComponent<dubs_Agent>().action1);
-			AddVectorObs(master.GetComponent<dubs_Agent>().action2);
+			//AddVectorObs(master.GetComponent<dubs_Agent>().action1);
+			//AddVectorObs(master.GetComponent<dubs_Agent>().action2);
 		}
 		
 		//other player relative position
@@ -94,8 +91,8 @@ public class dubs_Agent : Agent {
 		AddVectorObs((this.transform.position.z - 5)/5);
 		
 		// Agent velocity
-		AddVectorObs(rBody.velocity.x/5);
-		AddVectorObs(rBody.velocity.z/5);
+		//AddVectorObs(rBody.velocity.x/5);
+		//AddVectorObs(rBody.velocity.z/5);
 	}
 	
 	public float speed = 10;

@@ -7,7 +7,7 @@ public class dubs2_Agent : Agent {
 	Rigidbody rBody;
     void Start () 
 	{
-		//Time.timeScale = 0.25f;
+		Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
     }
 
@@ -26,38 +26,21 @@ public class dubs2_Agent : Agent {
         // The agent fell
 		
 		
-		//this.transform.position = new Vector3(3.0f, 0.0f, 3.0f);
+		this.transform.position = new Vector3(3.0f, 0.0f, 3.0f);
 		this.rBody.angularVelocity = Vector3.zero;
 		this.rBody.velocity = Vector3.zero;
 		
-		//other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
+		other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
 		
-        
-        
-		float tempOne = Random.value;
-		float tempTwo = Random.value;
-		
-		int mult1 = 1;
-		int mult2 = 1;
-		
-		if (tempOne > 0.5f)
-		{
-			mult1 = -1;
-		}
-		
-		if (tempTwo > 0.5f)
-		{
-			mult2 = -1;
-		}
 		
 		if (Target.GetComponent<dubs2_reward>().is_active == 0 && Target1.GetComponent<dubs2_reward>().is_active == 0)
 		{
 			// Move the target to a new spot
-			Target.transform.position = new Vector3(Random.value * 3 + 1 , 0.5f, Random.value * mult1 * 3 + 1 );
+			Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4 );
 			Target.GetComponent<dubs2_reward>().is_active = 1;
 			Target.GetComponent<Renderer>().material.color = Color.yellow;
 			
-			Target1.transform.position = new Vector3(Random.value * -3 - 1 , 0.5f, Random.value * mult2 * 3 -1);
+			Target1.transform.position = new Vector3(Random.value * 8 - 4 , 0.5f, Random.value * 8 - 4);
 			Target1.GetComponent<dubs2_reward>().is_active = 1;
 			Target1.GetComponent<Renderer>().material.color = Color.yellow;
 		}
@@ -109,8 +92,8 @@ public class dubs2_Agent : Agent {
 		AddVectorObs((this.transform.position.z - 5)/5);
 		
 		// Agent velocity
-		AddVectorObs(rBody.velocity.x/5);
-		AddVectorObs(rBody.velocity.z/5);
+		//AddVectorObs(rBody.velocity.x/5);
+		//AddVectorObs(rBody.velocity.z/5);
 	}
 	
 	public float speed = 10;
@@ -171,6 +154,8 @@ public class dubs2_Agent : Agent {
 		{
 			action1 = vectorAction[2];
 			action2 = vectorAction[3];
+			action1 = 0;
+			action2 = 0;
 			
 		}
 		
