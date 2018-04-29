@@ -5,26 +5,32 @@ using UnityEngine;
 public class dubs2_Agent : Agent {
 
 	Rigidbody rBody;
+	
+	public GameObject Target;
+	public GameObject Target1;
+	public bool is_player;
+	public float action1;
+	public float action2;
+	
+	public GameObject master;
+	public GameObject other;
+
+	public float reset_time;
+	public float reset_delay = 180.0f;
+	
     void Start () 
 	{
 		//Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
     }
 
-	public GameObject Target;
-	public GameObject Target1;
-	public bool is_bitch;
-	public float action1;
-	public float action2;
 	
-	public GameObject master;
-	public GameObject other;
 	
     public override void AgentReset()
     {
                 
         // The agent fell
-		
+		reset_time = Time.time + reset_delay;
 		
 		//this.transform.position = new Vector3(3.0f, 0.0f, 3.0f);
 		this.rBody.angularVelocity = Vector3.zero;
@@ -33,17 +39,14 @@ public class dubs2_Agent : Agent {
 		//other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
 		
 		
-		if (Target.GetComponent<dubs2_reward>().is_active == 0 && Target1.GetComponent<dubs2_reward>().is_active == 0)
-		{
-			// Move the target to a new spot
-			Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4 );
-			Target.GetComponent<dubs2_reward>().is_active = 1;
-			Target.GetComponent<Renderer>().material.color = Color.yellow;
+		// Move the target to a new spot
+		Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4 );
+		Target.GetComponent<dubs2_reward>().is_active = 1;
+		Target.GetComponent<Renderer>().material.color = Color.yellow;
 			
-			Target1.transform.position = new Vector3(Random.value * 8 - 4 , 0.5f, Random.value * 8 - 4);
-			Target1.GetComponent<dubs2_reward>().is_active = 1;
-			Target1.GetComponent<Renderer>().material.color = Color.yellow;
-		}
+		Target1.transform.position = new Vector3(Random.value * 8 - 4 , 0.5f, Random.value * 8 - 4);
+		Target1.GetComponent<dubs2_reward>().is_active = 1;
+		Target1.GetComponent<Renderer>().material.color = Color.yellow;
 		
         
         
@@ -57,14 +60,14 @@ public class dubs2_Agent : Agent {
 		Vector3 relativePosition1 = Target1.transform.position - this.transform.position;
 		Vector3 relativePosition2 = other.transform.position - this.transform.position;
 		
-		if (is_bitch)
+		if (is_player)
 		{
 			AddVectorObs(master.GetComponent<dubs2_Agent>().action1);
 			AddVectorObs(master.GetComponent<dubs2_Agent>().action2);
 		}
 		
 		//other player relative position
-		if (!is_bitch)
+		if (!is_player)
 		{
 			AddVectorObs(relativePosition2.x/5);
 			AddVectorObs(relativePosition2.z/5);
@@ -150,13 +153,16 @@ public class dubs2_Agent : Agent {
 		controlSignal.x = Mathf.Clamp(vectorAction[0], -1, 1);
 		controlSignal.z = Mathf.Clamp(vectorAction[1], -1, 1);
 		
-		if (is_bitch == false)
+		if (is_player == false)
 		{
 			action1 = vectorAction[2];
 			action2 = vectorAction[3];
-			action1 = 0;
-			action2 = 0;
 			
+		}
+		
+		if (Time.time > reset_time)
+		{
+			Done();
 		}
 		
 		

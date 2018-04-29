@@ -40,12 +40,10 @@ public class single_Agent : Agent {
 	{
 		// Calculate relative position
 		Vector3 relativePosition = Target.transform.position - this.transform.position;
-
 		
 		// Relative position
 		AddVectorObs(relativePosition.x/5);
 		AddVectorObs(relativePosition.z/5);
-		
 		
 		// Distance to edges of platform
 		AddVectorObs((this.transform.position.x + 5)/5);

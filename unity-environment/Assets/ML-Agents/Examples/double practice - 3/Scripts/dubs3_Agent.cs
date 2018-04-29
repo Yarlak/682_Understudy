@@ -5,15 +5,17 @@ using UnityEngine;
 public class dubs3_Agent : Agent {
 
 	Rigidbody rBody;
+	public string p_name;
     void Start () 
 	{
 		//Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
+		p_name = gameObject.name;
     }
 
 	public GameObject Target;
 	public GameObject Target1;
-	public bool is_bitch;
+	public bool is_player;
 	public float action1;
 	public float action2;
 	
@@ -30,25 +32,7 @@ public class dubs3_Agent : Agent {
 		this.rBody.angularVelocity = Vector3.zero;
 		this.rBody.velocity = Vector3.zero;
 		
-		//other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);
-		
-        
-        
-	
-		
-		if (Target.GetComponent<dubs3_reward>().is_active == 0 && Target1.GetComponent<dubs3_reward>().is_active == 0)
-		{
-			// Move the target to a new spot
-			Target.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
-			Target.GetComponent<dubs3_reward>().is_active = 1;
-			Target.GetComponent<Renderer>().material.color = Color.yellow;
-			
-			Target1.transform.position = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
-			Target1.GetComponent<dubs3_reward>().is_active = 1;
-			Target1.GetComponent<Renderer>().material.color = Color.yellow;
-		}
-		
-        
+		//other.transform.position = new Vector3(3.0f, 0.0f, 2.0f);  
         
     }
 	
@@ -60,10 +44,10 @@ public class dubs3_Agent : Agent {
 		Vector3 relativePosition1 = Target1.transform.position - this.transform.position;
 		Vector3 relativePosition2 = other.transform.position - this.transform.position;
 		
-		if (is_bitch)
+		if (is_player)
 		{
-			AddVectorObs(master.GetComponent<dubs3_Agent>().action1);
-			AddVectorObs(master.GetComponent<dubs3_Agent>().action2);
+			AddVectorObs(master.GetComponent<coach_Agent>().team_commands[p_name + "_1"]);
+			AddVectorObs(master.GetComponent<coach_Agent>().team_commands[p_name + "_2"]);
 		}else
 		{
 			AddVectorObs(relativePosition2.x/5);
@@ -135,9 +119,9 @@ public class dubs3_Agent : Agent {
 			dist_reward = -1 * dist1;
 		}
 		
-		if (is_bitch)
+		if (is_player)
 		{
-			master.GetComponent<dubs3_Agent>().AddReward(dist_reward);
+			master.GetComponent<coach_Agent>().AddReward(dist_reward);
 		}else
 		{
 			AddReward(dist_reward);
@@ -161,7 +145,7 @@ public class dubs3_Agent : Agent {
 		controlSignal.x = Mathf.Clamp(vectorAction[0], -1, 1);
 		controlSignal.z = Mathf.Clamp(vectorAction[1], -1, 1);
 		
-		if (is_bitch == false)
+		if (is_player == false)
 		{
 			action1 = vectorAction[2];
 			action2 = vectorAction[3];
