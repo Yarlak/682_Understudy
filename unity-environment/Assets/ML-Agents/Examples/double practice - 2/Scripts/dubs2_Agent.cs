@@ -71,21 +71,21 @@ public class dubs2_Agent : Agent {
 		{
 			AddVectorObs(relativePosition2.x/5);
 			AddVectorObs(relativePosition2.z/5);
+			
+			//TargetActive
+			AddVectorObs(Target.GetComponent<dubs2_reward>().is_active);
+			AddVectorObs(Target1.GetComponent<dubs2_reward>().is_active);
+			
+			
+			// Relative position
+			AddVectorObs(relativePosition.x/5);
+			AddVectorObs(relativePosition.z/5);
+			
+			
+			AddVectorObs(relativePosition1.x/5);
+			AddVectorObs(relativePosition1.z/5);
+			
 		}
-		
-		
-		//TargetActive
-		AddVectorObs(Target.GetComponent<dubs2_reward>().is_active);
-		AddVectorObs(Target1.GetComponent<dubs2_reward>().is_active);
-		
-		
-		// Relative position
-		AddVectorObs(relativePosition.x/5);
-		AddVectorObs(relativePosition.z/5);
-		
-		
-		AddVectorObs(relativePosition1.x/5);
-		AddVectorObs(relativePosition1.z/5);
 		
 		
 		// Distance to edges of platform
@@ -127,13 +127,21 @@ public class dubs2_Agent : Agent {
 			dist2 = distanceToTarget1/10;
 		}
 		
+		float dist_reward;
 		if (dist2 < dist1)
 		{
-			AddReward(-1 * dist2);
+			dist_reward = -1 * dist2;
 		}else
 		{
-			AddReward(-1 * dist1);
+			dist_reward = -1 * dist1;
 		}
+		
+		if (is_player)
+		{
+			other.GetComponent<dubs2_Agent>().AddReward(dist_reward);
+		}
+		
+		AddReward(dist_reward);
 		
 
 		// Time penalty

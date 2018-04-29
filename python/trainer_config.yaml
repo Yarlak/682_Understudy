@@ -224,8 +224,8 @@ p2_brain2:
     
 single_brain1:
     max_steps: 5.0e5
-    num_layers: 2
-    hidden_units: 50
+    num_layers: 3
+    hidden_units: 64
     
 p3_brain1:
     max_steps: 2.0e6
@@ -239,6 +239,17 @@ p3_brain2:
 
 p3_coach:
     max_steps: 2.0e6
-    num_layers: 2
-    hidden_units: 50
+    num_layers: 3
+    hidden_units: 64
+
+understudy_brain:
+    max_steps: 1.0e6
+    num_layers: 3
+    hidden_units: 64
+    learning_rate: 5.0e-3
+
+p3_understudy:
+    max_steps: 7.0e6
+    num_layers: 3
+    hidden_units: 64
 

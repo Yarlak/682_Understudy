@@ -11,8 +11,12 @@ public class single_Agent : Agent {
         rBody = GetComponent<Rigidbody>();
     }
 
+	public GameObject understudy;
 	public GameObject Target;
 	public bool is_bitch;
+	public Vector3 relativePosition;
+	public float action1;
+	public float action2;
 	
     public override void AgentReset()
     {
@@ -21,6 +25,7 @@ public class single_Agent : Agent {
 		this.rBody.angularVelocity = Vector3.zero;
 		this.rBody.velocity = Vector3.zero;
 		
+		understudy.GetComponent<understudy_agent>().Done();
 		
 		if (Target.GetComponent<single_reward>().is_active == 0)
 		{
@@ -35,11 +40,11 @@ public class single_Agent : Agent {
         
     }
 	
-	List<float> observation = new List<float>();
+
 	public override void CollectObservations()
 	{
 		// Calculate relative position
-		Vector3 relativePosition = Target.transform.position - this.transform.position;
+		relativePosition = Target.transform.position - this.transform.position;
 		
 		// Relative position
 		AddVectorObs(relativePosition.x/5);
@@ -76,7 +81,7 @@ public class single_Agent : Agent {
 		{
 			dist1 = distanceToTarget/10;
 		}
-				
+		
 		AddReward(-1 * dist1);
 		
 		// Time penalty
@@ -91,11 +96,12 @@ public class single_Agent : Agent {
 		
 		previousDistance = distanceToTarget;
 
-
 		// Actions, size = 2
 		Vector3 controlSignal = Vector3.zero;
 		controlSignal.x = Mathf.Clamp(vectorAction[0], -1, 1);
-		controlSignal.z = Mathf.Clamp(vectorAction[1], -1, 1);		
+		controlSignal.z = Mathf.Clamp(vectorAction[1], -1, 1);
+		action1 = vectorAction[0];
+		action2 = vectorAction[1];
 		//rBody.AddForce(controlSignal * speed);
 		rBody.velocity = controlSignal * speed;
 	 }
