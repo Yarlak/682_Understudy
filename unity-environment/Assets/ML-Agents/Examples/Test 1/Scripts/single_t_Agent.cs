@@ -19,10 +19,10 @@ public class single_t_Agent : Agent {
 	
     void Start () 
 	{
-		Time.timeScale = 100.0f;
+		Time.timeScale = 0.25f;
         rBody = GetComponent<Rigidbody>();
 
-		the_what = new StreamReader("C:/Users/OH YEA/Documents/NN_Final Project/ML Agents/unity-environment/Assets/ML-Agents/Examples/test-cs/test_points.csv");
+		the_what = new StreamReader("C:/Users/OH YEA/Documents/NN_Final Project/ML Agents/unity-environment/Assets/ML-Agents/Examples/Test2-L2/test_points.csv");
 		int count = 0;
 		while (!the_what.EndOfStream)
 		{
