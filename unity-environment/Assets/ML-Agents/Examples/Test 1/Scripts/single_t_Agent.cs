@@ -37,7 +37,6 @@ public class single_t_Agent : Agent {
     }
 
 	public GameObject Target;
-	public bool is_bitch;
 	public Vector3 relativePosition;
 	public float action1;
 	public float action2;
