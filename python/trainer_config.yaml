@@ -249,7 +249,8 @@ understudy_brain:
     learning_rate: 5.0e-3
 
 p3_understudy:
-    max_steps: 7.0e6
-    num_layers: 3
-    hidden_units: 64
+    max_steps: 4.0e6
+    num_layers: 6
+    hidden_units: 128
+    learning_rate: 3.0e-4
 
